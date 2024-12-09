@@ -3,15 +3,21 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import notes from './notes.js';
 
-
 // Argument Parsing with Yargs latest(17.7.2) version
 
 yargs(hideBin(process.argv))
     .command({                                                  //create remove command
         command: 'remove',
         describe: 'Remove note',
-        handler: function () {
-            console.log('Removing note...');
+        builder: {
+            title: {
+                describe: 'Title of the note to remove',
+                type: 'string',
+                demandOption: true,
+            }
+        },
+        handler: function (argv) {
+            notes.removeNote(argv.title);
         }
     })
     .command({                                                  //create add command
@@ -37,13 +43,13 @@ yargs(hideBin(process.argv))
         command: 'list',
         describe: 'List a new note',
         handler: function () {
-            console.log('Here is a list of all your notes...')
+           notes.listNotes();
         }
     })
     .command({                                                       //create read command
         command: 'read',
         describe: 'Read a note',
-        handler: function () {
+        handler: function (arv) {
             console.log('You are reading this note...');
         }
     })

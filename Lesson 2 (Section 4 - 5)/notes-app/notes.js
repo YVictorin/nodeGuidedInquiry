@@ -24,6 +24,9 @@ const addNote = (title, body) => {
     console.log(chalk.blue.inverse('New note added'));
 }
 
+
+
+
 const saveNote = (notesArr) => {
     //converting all the notes to a string then writing them to the json file
     const dataJSON = JSON.stringify(notesArr);
@@ -42,33 +45,51 @@ const loadNotes = () => {
 
 }
 
-const editNote = (title, body) => {
+const listNotes = () => {
+
+};
+
+
+const editNote = (userTitle, body) => {
     let notes = loadNotes();
 
-    //for all the notes in the json file
-    for(let i = 0; i < notes.length; i++) {
-
-        //if the json note's title is the same as the argument title change the body of the note
-        if (notes[i].title === title) {
-            notes[i].body = body;
-            console.log(chalk.green('Note edited'));
-            saveNote(notes);        //save the changes made to the json file
-            return;
-        } else if (notes[i].title !== title) {
+        if (notes.map((eachNote) => eachNote.title).indexOf(userTitle) === -1) {      //for all the json notes title if the userTitle is not in that array throw a message
             console.log(chalk.yellow('Note title does not exist, try adding the note first'));
-            return;
         } else {
-            console.log(chalk.red('An unexpected error occurred'));
-            return;
+            notes.map((eachNote) => eachNote.body = body)              //updating the specific note's body and saving that to the array
+            saveNote(notes);
+            console.log(chalk.green('Note edited'));
+        }
+
+}
+
+
+
+const removeNote = (title) => {
+    let notes = loadNotes();
+
+    for(let i = 0; i < notes.length; i++) {
+        if(notes[i].title !== title) {
+            console.log(chalk.red('Could not find note to remove'));
+        } else {
+            notes.splice(notes.indexOf(notes[i]), 1);
+            saveNote(notes);
         }
     }
 }
 
-// module.exports = getNotes; //es5
 
 
-export default {              //es6
+//es5 syntax
+// module.exports = getNotes;
+
+
+
+//es6 syntax
+export default {
     getNotes,
     addNote,
     editNote,
+    listNotes,
+    removeNote,
 };
