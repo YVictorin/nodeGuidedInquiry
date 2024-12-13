@@ -4,6 +4,9 @@ const express = require('express'); //express returns a single function
 const hbs = require('hbs');
 const weather = require('./utils/weather');
 const geocode = require('./utils/geocode');
+require('dotenv').config();
+
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
@@ -94,6 +97,7 @@ app.get('*', (req, res) => {
 })
 
 
-app.listen(3000, () => {
-    console.log('Server started on port 3000');
+//starts our app's website on our computer only
+app.listen(PORT, () => {
+    console.log('Server started on port ' + PORT);
 })

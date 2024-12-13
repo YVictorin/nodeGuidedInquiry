@@ -1,19 +1,18 @@
 {
-  "name": "web-server",
+  "name": "nodeguidedinquiry",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node \"Lesson 5 (Section 8-9)/web-server/src/app.js\"",
+    "build": "echo 'No build step needed'"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "hbs": "^4.2.0",
-    "nodemon": "^3.1.7",
     "request": "^2.88.2"
   }
 }

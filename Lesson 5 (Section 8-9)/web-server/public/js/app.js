@@ -11,8 +11,8 @@ const messageTwo = document.querySelector('#message-2');
  const getLocationWeather = async (userLocation) =>  {
     try {
         messageOne.textContent = 'Loading...';
-        messageTwo.textContent = '';   //before we fetch we make the second message empty, resetting it
-        const response = await fetch(`http://localhost:3000/weather?address=${userLocation}`);
+        messageTwo.textContent = '';   //before we fetch we make the second message empty, resetting it each time user enters a location
+        const response = await fetch(`/weather?address=${userLocation}`);
         const dataJson = await response.json();  //Output: Promise { <pending> } it is not JSON but a Promise Object, that's why we use await to wait until response is parsed into JSON
         messageOne.textContent = dataJson.location;
         messageTwo.textContent = dataJson.forecast;
