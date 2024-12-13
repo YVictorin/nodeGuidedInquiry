@@ -25,8 +25,6 @@ const addNote = (title, body) => {
 }
 
 
-
-
 const saveNote = (notesArr) => {
     //converting all the notes to a string then writing them to the json file
     const dataJSON = JSON.stringify(notesArr);
@@ -50,13 +48,13 @@ const listNotes = () => {
 };
 
 
-const editNote = (userTitle, body) => {
+const editNote = (userTitle, userBody) => {
     let notes = loadNotes();
 
         if (notes.map((eachNote) => eachNote.title).indexOf(userTitle) === -1) {      //for all the json notes title if the userTitle is not in that array throw a message
             console.log(chalk.yellow('Note title does not exist, try adding the note first'));
         } else {
-            notes.map((eachNote) => eachNote.body = body)              //updating the specific note's body and saving that to the array
+            notes[notes.findIndex((eachNote) => eachNote.title === userTitle)].body = userBody; //updating the specific user's note's body
             saveNote(notes);
             console.log(chalk.green('Note edited'));
         }
